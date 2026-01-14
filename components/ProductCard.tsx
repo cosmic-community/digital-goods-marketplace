@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Product } from '@/types';
+import AddToCartButton from './AddToCartButton';
 
 interface ProductCardProps {
   product: Product;
@@ -7,8 +8,8 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <Link href={`/products/${product.slug}`}>
-      <article className="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+    <article className="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+      <Link href={`/products/${product.slug}`}>
         {/* Product Image */}
         <div className="aspect-[4/3] overflow-hidden bg-gray-100">
           {product.metadata.featured_image ? (
@@ -40,7 +41,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             ${product.metadata.price}
           </p>
         </div>
-      </article>
-    </Link>
+      </Link>
+      
+      {/* Add to Cart Button */}
+      <div className="px-4 pb-4">
+        <AddToCartButton product={product} variant="secondary" size="small" className="w-full" />
+      </div>
+    </article>
   );
 }
