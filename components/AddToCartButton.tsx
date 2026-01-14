@@ -19,13 +19,8 @@ export default function AddToCartButton({
   const { addItem } = useCart();
 
   const handleAddToCart = () => {
-    addItem({
-      id: product.id,
-      slug: product.slug,
-      name: product.metadata.name,
-      price: product.metadata.price,
-      image: product.metadata.featured_image?.imgix_url,
-    });
+    // Changed: Pass the entire product object, CartContext extracts needed properties
+    addItem(product);
   };
 
   const baseClasses = 'font-display font-semibold tracking-wider uppercase transition-all relative overflow-hidden group';

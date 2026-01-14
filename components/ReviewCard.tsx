@@ -1,4 +1,4 @@
-import { Review } from '@/types';
+import { Review, getRatingValue } from '@/types';
 import StarRating from './StarRating';
 
 interface ReviewCardProps {
@@ -6,6 +6,13 @@ interface ReviewCardProps {
 }
 
 export default function ReviewCard({ review }: ReviewCardProps) {
+  // Changed: Extract rating as number using helper function
+  const ratingValue = getRatingValue(review.metadata.rating);
+  
+  // Changed: Use customer_name as fallback for reviewer_name, comment as fallback for content
+  const reviewerName = review.metadata.reviewer_name || review.metadata.customer_name;
+  const reviewContent = review.metadata.content || review.metadata.comment || '';
+  
   return (
     <article className="cyber-card rounded-xl p-6 relative overflow-hidden group">
       {/* Corner accent */}
@@ -17,23 +24,23 @@ export default function ReviewCard({ review }: ReviewCardProps) {
       {/* Quote mark */}
       <div className="absolute top-4 right-4 text-4xl text-neon-cyan/20 font-display">"</div>
       
-      {/* Rating */}
+      {/* Rating - Changed: Use extracted numeric rating */}
       <div className="mb-4 relative z-10">
-        <StarRating rating={review.metadata.rating} />
+        <StarRating rating={ratingValue} />
       </div>
       
-      {/* Review Content */}
+      {/* Review Content - Changed: Use reviewContent variable */}
       <p className="text-gray-300 mb-6 line-clamp-4 leading-relaxed relative z-10">
-        {review.metadata.content}
+        {reviewContent}
       </p>
       
-      {/* Reviewer Info */}
+      {/* Reviewer Info - Changed: Use optional chaining and fallbacks */}
       <div className="flex items-center gap-3 relative z-10">
         {review.metadata.reviewer_image ? (
           <div className="relative">
             <img
               src={`${review.metadata.reviewer_image.imgix_url}?w=80&h=80&fit=crop&auto=format,compress`}
-              alt={review.metadata.reviewer_name}
+              alt={reviewerName}
               width={40}
               height={40}
               className="w-10 h-10 rounded-lg object-cover border border-neon-cyan/30"
@@ -42,12 +49,14 @@ export default function ReviewCard({ review }: ReviewCardProps) {
           </div>
         ) : (
           <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-cyan/20 to-neon-magenta/20 flex items-center justify-center text-neon-cyan font-display font-bold border border-neon-cyan/30">
-            {review.metadata.reviewer_name.charAt(0).toUpperCase()}
+            {/* Changed: Use reviewerName variable with safe charAt */}
+            {reviewerName.charAt(0).toUpperCase()}
           </div>
         )}
         <div>
           <p className="font-display font-semibold text-white text-sm tracking-wide">
-            {review.metadata.reviewer_name}
+            {/* Changed: Use reviewerName variable */}
+            {reviewerName}
           </p>
           <p className="text-xs text-neon-cyan/70 font-display tracking-wider">VERIFIED_USER</p>
         </div>
