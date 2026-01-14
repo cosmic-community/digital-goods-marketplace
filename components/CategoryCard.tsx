@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import { BlogCategory } from '@/types';
 
@@ -8,6 +11,7 @@ interface CategoryCardProps {
 
 export default function CategoryCard({ category, postCount }: CategoryCardProps) {
   const color = category.metadata.color || '#00ffff';
+  const [isHovered, setIsHovered] = useState(false);
   
   return (
     <Link href={`/blog/categories/${category.slug}`}>
@@ -33,10 +37,10 @@ export default function CategoryCard({ category, postCount }: CategoryCardProps)
         </div>
         
         <h3 
-          className="font-display font-semibold text-white group-hover:transition-colors tracking-wide text-lg mb-2"
-          style={{ ['--tw-text-opacity' as string]: 1 }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = color)}
-          onMouseLeave={(e) => (e.currentTarget.style.color = 'white')}
+          className="font-display font-semibold tracking-wide text-lg mb-2 transition-colors"
+          style={{ color: isHovered ? color : 'white' }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
           {category.metadata.name}
         </h3>
