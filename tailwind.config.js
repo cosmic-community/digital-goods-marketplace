@@ -71,7 +71,38 @@ module.exports = {
         'neon-magenta': '0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff',
         'neon-pink': '0 0 5px #ff0080, 0 0 10px #ff0080, 0 0 20px #ff0080',
       },
+      // Changed: Added typography customization for prose classes
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'none',
+          },
+        },
+        invert: {
+          css: {
+            '--tw-prose-body': '#d1d5db',
+            '--tw-prose-headings': '#ffffff',
+            '--tw-prose-lead': '#9ca3af',
+            '--tw-prose-links': '#00ffff',
+            '--tw-prose-bold': '#ffffff',
+            '--tw-prose-counters': '#9ca3af',
+            '--tw-prose-bullets': '#00ffff',
+            '--tw-prose-hr': 'rgba(0, 255, 255, 0.2)',
+            '--tw-prose-quotes': '#d1d5db',
+            '--tw-prose-quote-borders': '#ff00ff',
+            '--tw-prose-captions': '#9ca3af',
+            '--tw-prose-code': '#00ffff',
+            '--tw-prose-pre-code': '#d1d5db',
+            '--tw-prose-pre-bg': 'rgba(10, 10, 15, 0.8)',
+            '--tw-prose-th-borders': 'rgba(0, 255, 255, 0.3)',
+            '--tw-prose-td-borders': 'rgba(0, 255, 255, 0.1)',
+          },
+        },
+      },
     },
   },
-  plugins: [],
+  // Changed: Added typography plugin
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
