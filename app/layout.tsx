@@ -7,6 +7,9 @@ import CosmicBadge from '@/components/CosmicBadge';
 export const metadata: Metadata = {
   title: 'Digital Goods Marketplace',
   description: 'Premium digital products, templates, and resources for creators',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
