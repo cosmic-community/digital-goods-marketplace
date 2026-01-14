@@ -39,13 +39,21 @@ export interface Product extends CosmicObject {
   };
 }
 
-// Rating type for select-dropdown
-export interface RatingOption {
+// Rating type for select-dropdown - Changed: Can be either object or string depending on API response
+export type RatingOption = {
   key: string;
   value: string;
+} | string;
+
+// Changed: Helper function to extract numeric rating from RatingOption
+export function getRatingValue(rating: RatingOption): number {
+  if (typeof rating === 'string') {
+    return parseInt(rating, 10) || 0;
+  }
+  return parseInt(rating.key, 10) || 0;
 }
 
-// Review type
+// Review type - Changed: Updated metadata to match actual Cosmic content model fields
 export interface Review extends CosmicObject {
   type: 'reviews';
   metadata: {
@@ -54,6 +62,10 @@ export interface Review extends CosmicObject {
     rating: RatingOption;
     comment?: string;
     verified_purchase: boolean;
+    // Changed: Added optional fields that the component uses
+    reviewer_name?: string;
+    reviewer_image?: CosmicFile;
+    content?: string;
   };
 }
 
@@ -78,7 +90,7 @@ export interface CartItem {
   quantity: number;
 }
 
-// Changed: Added ContactSubmission type for contact form submissions
+// Changed: Added ContactSubmission type for contact form submissions (from agent branch)
 export interface ContactSubmission extends CosmicObject {
   type: 'contact-submissions';
   metadata: {
