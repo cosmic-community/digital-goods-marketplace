@@ -42,10 +42,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   const formattedDate = post.metadata.published_date 
     ? new Date(post.metadata.published_date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      })
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })
     : null;
 
   return (
@@ -150,11 +150,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         )}
 
-        {/* Article Content */}
-        <article className="prose prose-invert prose-cyan max-w-none mb-16">
+        {/* Changed: Article Content - Using custom blog-content class for better styling */}
+        <article className="mb-16">
           {post.metadata.content ? (
             <div 
-              className="text-gray-300 leading-relaxed"
+              className="blog-content"
               dangerouslySetInnerHTML={{ __html: post.metadata.content }}
             />
           ) : post.metadata.excerpt ? (
