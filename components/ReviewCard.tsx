@@ -1,11 +1,13 @@
+import Link from 'next/link';
 import { Review, getRatingValue } from '@/types';
 import StarRating from './StarRating';
 
 interface ReviewCardProps {
   review: Review;
+  showProduct?: boolean;
 }
 
-export default function ReviewCard({ review }: ReviewCardProps) {
+export default function ReviewCard({ review, showProduct = true }: ReviewCardProps) {
   // Changed: Extract rating as number using helper function
   const ratingValue = getRatingValue(review.metadata.rating);
   
@@ -58,9 +60,28 @@ export default function ReviewCard({ review }: ReviewCardProps) {
             {/* Changed: Use reviewerName variable */}
             {reviewerName}
           </p>
-          <p className="text-xs text-neon-cyan/70 font-display tracking-wider">VERIFIED_USER</p>
+          {review.metadata.verified_purchase && (
+            <p className="text-xs text-neon-green/70 font-display tracking-wider flex items-center gap-1">
+              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              VERIFIED_USER
+            </p>
+          )}
         </div>
       </div>
+
+      {/* Product Link - Added from agent branch */}
+      {showProduct && review.metadata.product && (
+        <div className="mt-4 pt-4 border-t border-neon-cyan/10">
+          <Link
+            href={`/products/${review.metadata.product.slug}`}
+            className="text-sm text-neon-cyan hover:text-neon-magenta font-display tracking-wide transition-colors"
+          >
+            {review.metadata.product.metadata.name} →
+          </Link>
+        </div>
+      )}
       
       {/* Bottom accent */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-cyan/30 to-transparent"></div>

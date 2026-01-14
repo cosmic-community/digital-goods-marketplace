@@ -1,15 +1,33 @@
 // app/products/[slug]/page.tsx
-import { getProductBySlug, getProducts } from '@/lib/cosmic';
+import { getProductBySlug, getProducts, getReviewsByProduct } from '@/lib/cosmic';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import AddToCartButton from '@/components/AddToCartButton';
 import ProductCard from '@/components/ProductCard';
+import StarRating from '@/components/StarRating';
+import ReviewCard from '@/components/ReviewCard';
 
 export async function generateStaticParams() {
   const products = await getProducts();
   return products.map((product) => ({
     slug: product.slug,
   }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
+  
+  if (!product) {
+    return {
+      title: 'Product Not Found | CYBER_MARKET',
+    };
+  }
+  
+  return {
+    title: `${product.metadata.name} | CYBER_MARKET`,
+    description: product.metadata.description?.substring(0, 160) || `Buy ${product.metadata.name}`,
+  };
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -20,10 +38,24 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     notFound();
   }
 
-  const allProducts = await getProducts();
+  const [allProducts, reviews] = await Promise.all([
+    getProducts(),
+    getReviewsByProduct(product.id),
+  ]);
+  
   const relatedProducts = allProducts
     .filter((p) => p.id !== product.id)
     .slice(0, 4);
+
+  // Calculate average rating
+  const averageRating = reviews.length > 0
+    ? reviews.reduce((sum, review) => {
+        const rating = typeof review.metadata.rating === 'string' 
+          ? parseInt(review.metadata.rating, 10) 
+          : parseInt(review.metadata.rating.key, 10);
+        return sum + (rating || 0);
+      }, 0) / reviews.length
+    : 0;
 
   return (
     <div className="py-12 px-4 min-h-[60vh]">
@@ -79,6 +111,16 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               {product.metadata.name}
             </h1>
 
+            {/* Rating Summary */}
+            {reviews.length > 0 && (
+              <div className="flex items-center gap-3 mb-4">
+                <StarRating rating={Math.round(averageRating)} />
+                <span className="text-gray-400 font-display text-sm">
+                  ({reviews.length} review{reviews.length !== 1 ? 's' : ''})
+                </span>
+              </div>
+            )}
+
             <div className="flex items-baseline gap-2 mb-6">
               <span className="text-gray-500 font-display">PRICE:</span>
               <span className="text-4xl font-display font-bold text-neon-cyan">
@@ -123,6 +165,24 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </div>
           </div>
         </div>
+
+        {/* Reviews Section */}
+        {reviews.length > 0 && (
+          <div className="mb-16">
+            <div className="h-px bg-gradient-to-r from-transparent via-neon-pink/30 to-transparent mb-12"></div>
+            <div className="mb-8">
+              <span className="text-neon-pink font-display text-sm tracking-widest uppercase">// Customer Reviews</span>
+              <h2 className="font-display text-2xl font-bold text-white mt-2">
+                USER_<span className="text-neon-cyan">FEEDBACK</span> ({reviews.length})
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {reviews.map((review) => (
+                <ReviewCard key={review.id} review={review} showProduct={false} />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (

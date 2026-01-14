@@ -50,7 +50,7 @@ export function getRatingValue(rating: RatingOption): number {
   if (typeof rating === 'string') {
     return parseInt(rating, 10) || 0;
   }
-  return parseInt(rating.value, 10) || 0;
+  return parseInt(rating.key, 10) || 0;
 }
 
 // Review type - Changed: Updated metadata to match actual Cosmic content model fields
@@ -88,6 +88,18 @@ export interface CartItem {
   price: number;
   image?: string;
   quantity: number;
+}
+
+// Changed: Added ContactSubmission type for contact form submissions (from agent branch)
+export interface ContactSubmission extends CosmicObject {
+  type: 'contact-submissions';
+  metadata: {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    status: string;
+  };
 }
 
 // API response type

@@ -2,6 +2,11 @@ import { getProducts, getCollections } from '@/lib/cosmic';
 import ProductCard from '@/components/ProductCard';
 import Link from 'next/link';
 
+export const metadata = {
+  title: 'Products | CYBER_MARKET',
+  description: 'Browse our complete collection of premium digital products',
+};
+
 export default async function ProductsPage() {
   const [products, collections] = await Promise.all([
     getProducts(),

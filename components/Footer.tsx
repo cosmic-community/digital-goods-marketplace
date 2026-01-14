@@ -46,6 +46,11 @@ export default function Footer() {
                   <span className="text-neon-cyan/50">&gt;</span> About
                 </Link>
               </li>
+              <li>
+                <Link href="/contact" className="text-gray-500 hover:text-neon-cyan transition-colors text-sm flex items-center gap-2">
+                  <span className="text-neon-cyan/50">&gt;</span> Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -57,6 +62,12 @@ export default function Footer() {
             <p className="text-gray-500 text-sm mb-4">
               Have questions? Send a transmission through the network.
             </p>
+            <Link
+              href="/contact"
+              className="inline-block cyber-btn px-4 py-2 rounded-lg font-display font-medium text-sm text-neon-cyan hover:text-white transition-colors mb-4"
+            >
+              Contact Us
+            </Link>
             <div className="flex gap-3">
               <span className="w-8 h-8 rounded-lg border border-neon-cyan/30 flex items-center justify-center text-neon-cyan hover:bg-neon-cyan/10 cursor-pointer transition-colors">
                 𝕏

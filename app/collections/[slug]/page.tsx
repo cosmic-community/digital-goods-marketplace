@@ -11,6 +11,22 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const collection = await getCollectionBySlug(slug);
+  
+  if (!collection) {
+    return {
+      title: 'Collection Not Found | CYBER_MARKET',
+    };
+  }
+  
+  return {
+    title: `${collection.metadata.name} | CYBER_MARKET`,
+    description: collection.metadata.description || `Browse ${collection.metadata.name} collection`,
+  };
+}
+
 export default async function CollectionPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const collection = await getCollectionBySlug(slug);

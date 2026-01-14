@@ -1,6 +1,11 @@
 import { getCollections } from '@/lib/cosmic';
 import CollectionCard from '@/components/CollectionCard';
 
+export const metadata = {
+  title: 'Collections | CYBER_MARKET',
+  description: 'Browse our curated collections of premium digital products',
+};
+
 export default async function CollectionsPage() {
   const collections = await getCollections();
 
