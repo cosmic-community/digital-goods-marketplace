@@ -57,7 +57,7 @@ export interface Review extends CosmicObject {
   };
 }
 
-// Page type - Changed: Added Page interface for CMS-powered pages
+// Page type - Added Page interface for CMS-powered pages (from agent branch)
 export interface Page extends CosmicObject {
   type: 'pages';
   metadata: {
@@ -66,6 +66,16 @@ export interface Page extends CosmicObject {
     content?: string;
     featured_image?: CosmicFile;
   };
+}
+
+// Cart item type (from base branch)
+export interface CartItem {
+  id: string;
+  slug: string;
+  name: string;
+  price: number;
+  image?: string;
+  quantity: number;
 }
 
 // API response type
