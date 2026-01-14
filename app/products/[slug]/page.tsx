@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { getProductBySlug, getReviewsByProduct, getProducts } from '@/lib/cosmic';
 import StarRating from '@/components/StarRating';
 import ReviewCard from '@/components/ReviewCard';
+import AddToCartButton from '@/components/AddToCartButton';
 
 export async function generateStaticParams() {
   const products = await getProducts();
@@ -117,10 +118,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
             )}
 
-            {/* CTA Button */}
-            <button className="w-full sm:w-auto bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors text-lg">
-              Purchase Now
-            </button>
+            {/* Add to Cart Button */}
+            <AddToCartButton product={product} size="large" className="w-full sm:w-auto" />
           </div>
         </div>
 

@@ -57,6 +57,16 @@ export interface Review extends CosmicObject {
   };
 }
 
+// Cart item type
+export interface CartItem {
+  id: string;
+  slug: string;
+  name: string;
+  price: number;
+  image?: string;
+  quantity: number;
+}
+
 // API response type
 export interface CosmicResponse<T> {
   objects: T[];
