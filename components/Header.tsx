@@ -7,12 +7,13 @@ import CartIcon from './CartIcon';
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Changed: Added About link to navigation (from agent branch)
+  // Changed: Added Contact link to navigation
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/products', label: 'Products' },
     { href: '/collections', label: 'Collections' },
     { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
   ];
 
   return (

@@ -1,5 +1,5 @@
 import { createBucketClient } from '@cosmicjs/sdk';
-import { Product, Collection, Review, Page, hasStatus } from '@/types';
+import { Product, Collection, Review, Page, ContactSubmission, hasStatus } from '@/types';
 
 export const cosmic = createBucketClient({
   bucketSlug: process.env.COSMIC_BUCKET_SLUG as string,
@@ -134,4 +134,29 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
     }
     throw new Error('Failed to fetch page');
   }
+}
+
+// Changed: Added function to create contact submission
+export async function createContactSubmission(data: {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}): Promise<ContactSubmission> {
+  const slug = `contact-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+  
+  const response = await cosmic.objects.insertOne({
+    title: `Contact from ${data.name}`,
+    slug,
+    type: 'contact-submissions',
+    metadata: {
+      name: data.name,
+      email: data.email,
+      subject: data.subject,
+      message: data.message,
+      status: 'New'
+    }
+  });
+  
+  return response.object as ContactSubmission;
 }

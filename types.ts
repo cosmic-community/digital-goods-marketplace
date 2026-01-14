@@ -78,6 +78,18 @@ export interface CartItem {
   quantity: number;
 }
 
+// Changed: Added ContactSubmission type for contact form submissions
+export interface ContactSubmission extends CosmicObject {
+  type: 'contact-submissions';
+  metadata: {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    status: string;
+  };
+}
+
 // API response type
 export interface CosmicResponse<T> {
   objects: T[];

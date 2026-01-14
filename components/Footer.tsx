@@ -32,15 +32,26 @@ export default function Footer() {
                   Collections
                 </Link>
               </li>
+              <li>
+                <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
+                  About Us
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact - Changed: Added contact link */}
           <div>
             <h3 className="font-semibold text-lg mb-4">Contact</h3>
-            <p className="text-gray-400">
+            <p className="text-gray-400 mb-4">
               Have questions? Reach out to us anytime.
             </p>
+            <Link 
+              href="/contact" 
+              className="inline-block bg-primary-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors"
+            >
+              Contact Us
+            </Link>
           </div>
         </div>
 
