@@ -102,6 +102,43 @@ export interface ContactSubmission extends CosmicObject {
   };
 }
 
+// Changed: Added Author type for blog authors
+export interface Author extends CosmicObject {
+  type: 'authors';
+  metadata: {
+    name: string;
+    bio?: string;
+    avatar?: CosmicFile;
+    social_twitter?: string;
+    social_github?: string;
+  };
+}
+
+// Changed: Added BlogCategory type for blog categories
+export interface BlogCategory extends CosmicObject {
+  type: 'blog-categories';
+  metadata: {
+    name: string;
+    description?: string;
+    color?: string;
+  };
+}
+
+// Changed: Added BlogPost type for blog posts
+export interface BlogPost extends CosmicObject {
+  type: 'blog-posts';
+  metadata: {
+    title: string;
+    excerpt?: string;
+    content?: string;
+    featured_image?: CosmicFile;
+    author?: Author;
+    category?: BlogCategory;
+    published_date?: string;
+    reading_time?: number;
+  };
+}
+
 // API response type
 export interface CosmicResponse<T> {
   objects: T[];
