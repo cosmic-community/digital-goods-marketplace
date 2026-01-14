@@ -60,17 +60,17 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         {/* Product Details */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           {/* Product Image */}
-          <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
+          <div className="bg-white rounded-2xl overflow-hidden shadow-lg w-full">
             {product.metadata.featured_image ? (
               <img
                 src={`${product.metadata.featured_image.imgix_url}?w=1200&h=800&fit=crop&auto=format,compress`}
                 alt={product.metadata.name}
                 width={600}
                 height={400}
-                className="w-full h-auto object-cover"
+                className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
+              <div className="w-full aspect-[4/3] bg-gray-200 flex items-center justify-center">
                 <span className="text-gray-400">No image available</span>
               </div>
             )}
