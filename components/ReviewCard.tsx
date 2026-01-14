@@ -1,56 +1,60 @@
-import Link from 'next/link';
 import { Review } from '@/types';
-import StarRating from '@/components/StarRating';
+import StarRating from './StarRating';
 
 interface ReviewCardProps {
   review: Review;
-  showProduct?: boolean;
 }
 
-export default function ReviewCard({ review, showProduct = true }: ReviewCardProps) {
-  const rating = parseInt(review.metadata.rating.key);
-
+export default function ReviewCard({ review }: ReviewCardProps) {
   return (
-    <article className="bg-white rounded-xl p-6 shadow-md">
+    <article className="cyber-card rounded-xl p-6 relative overflow-hidden group">
+      {/* Corner accent */}
+      <div className="absolute top-0 left-0 w-12 h-12">
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-neon-magenta to-transparent"></div>
+        <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-neon-magenta to-transparent"></div>
+      </div>
+      
+      {/* Quote mark */}
+      <div className="absolute top-4 right-4 text-4xl text-neon-cyan/20 font-display">"</div>
+      
       {/* Rating */}
-      <div className="flex items-center gap-2 mb-3">
-        <StarRating rating={rating} />
-        <span className="text-sm text-gray-500">{review.metadata.rating.value}</span>
+      <div className="mb-4 relative z-10">
+        <StarRating rating={review.metadata.rating} />
       </div>
-
-      {/* Comment */}
-      {review.metadata.comment && (
-        <p className="text-gray-700 mb-4 line-clamp-3">
-          "{review.metadata.comment}"
-        </p>
-      )}
-
-      {/* Customer Info */}
-      <div className="flex items-center justify-between">
+      
+      {/* Review Content */}
+      <p className="text-gray-300 mb-6 line-clamp-4 leading-relaxed relative z-10">
+        {review.metadata.content}
+      </p>
+      
+      {/* Reviewer Info */}
+      <div className="flex items-center gap-3 relative z-10">
+        {review.metadata.reviewer_image ? (
+          <div className="relative">
+            <img
+              src={`${review.metadata.reviewer_image.imgix_url}?w=80&h=80&fit=crop&auto=format,compress`}
+              alt={review.metadata.reviewer_name}
+              width={40}
+              height={40}
+              className="w-10 h-10 rounded-lg object-cover border border-neon-cyan/30"
+            />
+            <div className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-neon-green border-2 border-cyber-dark"></div>
+          </div>
+        ) : (
+          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-cyan/20 to-neon-magenta/20 flex items-center justify-center text-neon-cyan font-display font-bold border border-neon-cyan/30">
+            {review.metadata.reviewer_name.charAt(0).toUpperCase()}
+          </div>
+        )}
         <div>
-          <p className="font-medium text-gray-900">{review.metadata.customer_name}</p>
-          {review.metadata.verified_purchase && (
-            <span className="inline-flex items-center text-xs text-green-600 mt-1">
-              <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              Verified Purchase
-            </span>
-          )}
+          <p className="font-display font-semibold text-white text-sm tracking-wide">
+            {review.metadata.reviewer_name}
+          </p>
+          <p className="text-xs text-neon-cyan/70 font-display tracking-wider">VERIFIED_USER</p>
         </div>
       </div>
-
-      {/* Product Link */}
-      {showProduct && review.metadata.product && (
-        <div className="mt-4 pt-4 border-t border-gray-100">
-          <Link
-            href={`/products/${review.metadata.product.slug}`}
-            className="text-sm text-primary-600 hover:text-primary-700 font-medium"
-          >
-            {review.metadata.product.metadata.name} →
-          </Link>
-        </div>
-      )}
+      
+      {/* Bottom accent */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-cyan/30 to-transparent"></div>
     </article>
   );
 }

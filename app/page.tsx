@@ -17,41 +17,68 @@ export default async function HomePage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="gradient-hero text-white py-20 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Premium Digital Products
+      <section className="gradient-hero text-white py-24 px-4 relative">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-cyan/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-magenta/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        </div>
+        
+        <div className="max-w-6xl mx-auto text-center relative z-10">
+          <div className="inline-block mb-6 px-4 py-2 border border-neon-cyan/50 bg-neon-cyan/10 rounded-full">
+            <span className="text-neon-cyan text-sm font-display tracking-widest uppercase">// System Online</span>
+          </div>
+          
+          <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+            <span className="text-neon-cyan neon-text">CYBER</span>
+            <span className="text-white">_</span>
+            <span className="text-neon-magenta neon-text">MARKET</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-2xl mx-auto">
-            Discover high-quality templates, tools, and resources crafted by experts for your next project.
+          
+          <p className="text-xl md:text-2xl mb-10 text-gray-300 max-w-2xl mx-auto font-light">
+            Premium digital assets from the neon underground. 
+            <span className="text-neon-cyan"> Templates</span>, 
+            <span className="text-neon-magenta"> tools</span>, and 
+            <span className="text-neon-pink"> resources</span> for creators of tomorrow.
           </p>
+          
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/products"
-              className="bg-white text-primary-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+              className="cyber-btn px-8 py-4 rounded-lg font-display font-semibold tracking-wider uppercase text-neon-cyan hover:text-white transition-colors"
             >
-              Browse Products
+              &lt; Browse Products /&gt;
             </Link>
             <Link
               href="/collections"
-              className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors"
+              className="border border-neon-magenta/50 text-neon-magenta px-8 py-4 rounded-lg font-display font-semibold hover:bg-neon-magenta/10 hover:shadow-neon-magenta transition-all tracking-wider uppercase"
             >
               View Collections
             </Link>
           </div>
         </div>
+        
+        {/* Decorative Elements */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-cyan to-transparent"></div>
       </section>
 
       {/* Collections Section */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-20 px-4 bg-cyber-dark/50 relative">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-magenta/50 to-transparent"></div>
+        
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-gray-900">Collections</h2>
+          <div className="flex items-center justify-between mb-10">
+            <div>
+              <span className="text-neon-magenta font-display text-sm tracking-widest uppercase">// Categories</span>
+              <h2 className="font-display text-3xl font-bold text-white mt-2">
+                DATA_<span className="text-neon-cyan">COLLECTIONS</span>
+              </h2>
+            </div>
             <Link
               href="/collections"
-              className="text-primary-600 font-medium hover:text-primary-700 transition-colors"
+              className="text-neon-cyan font-display hover:text-neon-magenta transition-colors group flex items-center gap-2"
             >
-              View All →
+              View All 
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -63,15 +90,23 @@ export default async function HomePage() {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="py-20 px-4 bg-cyber-darker relative">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-cyan/50 to-transparent"></div>
+        
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-gray-900">Featured Products</h2>
+          <div className="flex items-center justify-between mb-10">
+            <div>
+              <span className="text-neon-cyan font-display text-sm tracking-widest uppercase">// Featured</span>
+              <h2 className="font-display text-3xl font-bold text-white mt-2">
+                HOT_<span className="text-neon-magenta">PRODUCTS</span>
+              </h2>
+            </div>
             <Link
               href="/products"
-              className="text-primary-600 font-medium hover:text-primary-700 transition-colors"
+              className="text-neon-magenta font-display hover:text-neon-cyan transition-colors group flex items-center gap-2"
             >
-              View All →
+              View All 
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -83,12 +118,17 @@ export default async function HomePage() {
       </section>
 
       {/* Reviews Section */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-20 px-4 bg-cyber-dark/50 relative">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-pink/50 to-transparent"></div>
+        
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">What Customers Say</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Join thousands of satisfied customers who have transformed their projects with our digital products.
+            <span className="text-neon-pink font-display text-sm tracking-widest uppercase">// Testimonials</span>
+            <h2 className="font-display text-3xl font-bold text-white mt-2 mb-4">
+              USER_<span className="text-neon-cyan">FEEDBACK</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Verified transmissions from the network. Join thousands who've upgraded their digital arsenal.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -100,21 +140,33 @@ export default async function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-primary-600 to-accent-600 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Start Your Next Project?
+      <section className="py-24 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyber-purple via-cyber-dark to-cyber-blue"></div>
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/3 w-96 h-96 bg-neon-cyan/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-neon-magenta/5 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <div className="inline-block mb-6 px-4 py-2 border border-neon-cyan/30 rounded-full">
+            <span className="text-neon-cyan font-display text-sm tracking-widest">SYSTEM_UPGRADE_AVAILABLE</span>
+          </div>
+          
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-white">
+            Ready to <span className="text-neon-magenta neon-text">Jack In</span>?
           </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Explore our full catalog of premium digital products and find exactly what you need.
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+            Access our full catalog of premium digital assets. Your next project awaits in the data stream.
           </p>
           <Link
             href="/products"
-            className="inline-block bg-white text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+            className="inline-block cyber-btn px-10 py-4 rounded-lg font-display font-bold text-lg tracking-wider uppercase text-neon-cyan hover:text-white transition-colors"
           >
-            Explore All Products
+            Initialize Download →
           </Link>
         </div>
+        
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-magenta to-transparent"></div>
       </section>
     </div>
   );

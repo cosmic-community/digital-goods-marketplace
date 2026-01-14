@@ -1,16 +1,24 @@
 interface StarRatingProps {
   rating: number;
-  maxRating?: number;
+  size?: 'small' | 'medium' | 'large';
 }
 
-export default function StarRating({ rating, maxRating = 5 }: StarRatingProps) {
+export default function StarRating({ rating, size = 'medium' }: StarRatingProps) {
+  const sizeClasses = {
+    small: 'w-3 h-3',
+    medium: 'w-4 h-4',
+    large: 'w-5 h-5',
+  };
+
   return (
-    <div className="flex items-center gap-0.5">
-      {Array.from({ length: maxRating }).map((_, index) => (
+    <div className="flex items-center gap-1">
+      {[1, 2, 3, 4, 5].map((star) => (
         <svg
-          key={index}
-          className={`w-5 h-5 ${
-            index < rating ? 'text-yellow-400' : 'text-gray-300'
+          key={star}
+          className={`${sizeClasses[size]} ${
+            star <= rating 
+              ? 'text-neon-yellow drop-shadow-[0_0_3px_rgba(255,255,0,0.8)]' 
+              : 'text-gray-600'
           }`}
           fill="currentColor"
           viewBox="0 0 20 20"

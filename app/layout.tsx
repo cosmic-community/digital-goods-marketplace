@@ -6,8 +6,8 @@ import CosmicBadge from '@/components/CosmicBadge';
 import { CartProvider } from '@/contexts/CartContext';
 
 export const metadata: Metadata = {
-  title: 'Digital Goods Marketplace',
-  description: 'Premium digital products, templates, and resources for creators',
+  title: 'CYBER_MARKET // Digital Goods',
+  description: 'Premium digital products from the neon underground. Templates, tools, and resources for the future.',
   icons: {
     icon: '/favicon.svg',
   },
@@ -25,7 +25,7 @@ export default function RootLayout({
       <head>
         <script src="/dashboard-console-capture.js" />
       </head>
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col cyber-grid">
         <CartProvider>
           <Header />
           <main className="flex-grow">
