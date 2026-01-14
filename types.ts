@@ -57,6 +57,17 @@ export interface Review extends CosmicObject {
   };
 }
 
+// Page type - Changed: Added Page interface for CMS-powered pages
+export interface Page extends CosmicObject {
+  type: 'pages';
+  metadata: {
+    headline: string;
+    subheadline?: string;
+    content?: string;
+    featured_image?: CosmicFile;
+  };
+}
+
 // API response type
 export interface CosmicResponse<T> {
   objects: T[];

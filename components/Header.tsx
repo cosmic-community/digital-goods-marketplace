@@ -6,10 +6,12 @@ import Link from 'next/link';
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Changed: Added About link to navigation
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/products', label: 'Products' },
     { href: '/collections', label: 'Collections' },
+    { href: '/about', label: 'About' },
   ];
 
   return (
